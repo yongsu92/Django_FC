@@ -20,14 +20,25 @@ class LoginForm(forms.Form):
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
         
+        # if username and password:
+        #     fcuser_username = Fcuser.objects.filter(username=username)
+        #     if not fcuser_username:
+        #         self.add_error('username','존재하지 않는 아이디입니다.')
+        #     else:
+        #         fcuser = Fcuser.objects.get(username=username)
+        #         if not check_password(password,fcuser.password):
+        #             self.add_error('password','비밀번호를 틀렸습니다.')
+        #         else:
+        #             self.user_id = fcuser.id
+        
         if username and password:
-            fcuser_username = Fcuser.objects.filter(username=username)
-            if not fcuser_username:
-                self.add_error('username','존재하지 않는 아이디입니다.')
-            else:
+            try:
                 fcuser = Fcuser.objects.get(username=username)
-                if not check_password(password,fcuser.password):
-                    self.add_error('password','비밀번호를 틀렸습니다.')
-                else:
-                    self.user_id = fcuser.id
+            except Fcuser.DoesNotExist:
+                self.add_error('username','아이디가 없습니다.')
+                return
+            if not check_password(password,fcuser.password):
+                self.add_error('password','비밀번호를 틀렸습니다.')
+            else:
+                self.user_id = fcuser.id
 

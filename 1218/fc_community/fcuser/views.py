@@ -6,12 +6,8 @@ from .forms import LoginForm
 
 
 def home(request):
-    user_id = request.session.get('user')
-    if user_id:
-
-        fcuser = get_object_or_404(Fcuser, pk=user_id)
-        return HttpResponse(fcuser.username)
-    return HttpResponse('home')
+    
+    return render(request,'fcuser/home.html')
 
 def logout(request):
     if request.session.get('user'):
@@ -23,7 +19,6 @@ def register(request):
     if request.method == 'GET':
         return render(request,'fcuser/register.html')
     elif request.method == 'POST':
-
         username = request.POST.get('username',None)
         useremail = request.POST.get('useremail',None)
         password =request.POST.get('password',None)

@@ -24,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=c@%yeqobqo30=ymioo_q1lgw*xd#px*uo*_f!9%(my@%!#i#p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# DEBUG = True # 프로그램 개발시
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    'yongsu.pythonanywhere.com'
+]
 
 
 # Application definition
@@ -34,7 +38,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'board',
     'fcuser',
-
+    'tag',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,7 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-    # BASE_DIR / 'static/
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static')
+#     # BASE_DIR / 'static/
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
